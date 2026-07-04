@@ -1,0 +1,127 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+@font-face {
+    font-family: NexaBold;
+    src: url(../Fonts/Nexa\ Bold.otf);
+
+}
+@font-face {
+    font-family: NexaLight;
+    src: url(../Fonts/Nexa\ Light.otf);
+}
+/*Estilo pricing*/
+.pricing{
+    width: 100vw;
+    height: 100vh;
+    background: #ddd;
+    display: flex;
+    align-items: center;
+    gap: 50px;
+}
+.pricing >:nth-child(2){
+    transform: scale(100%);
+    transition: all 0.3 ease;
+}
+.pricing >:nth-child(2):hover{
+    transform: scale(115%);
+}
+.pricing >:nth-child(1){
+    transform: scale(100%);
+    transition: all 0.3 ease;
+}
+.pricing >:nth-child(1):hover{
+    transform: scale(115%);
+}
+.pricing >:nth-child(3){
+    transform: scale(100%);
+    transition: all 0.3 ease;
+}
+.pricing >:nth-child(3):hover{
+    transform: scale(115%);
+}
+    
+/*Estilos tarjeta*/
+.pricing-box{
+    width: 300px;
+    height: auto;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    border-radius: 35px;
+    overflow: hidden;
+}
+.pricing-box-item1{
+    width: 100%;
+    height: auto;
+    padding: 20px 0;
+    text-align: center;
+    color: #fff;
+}
+.pricing-item2{
+    width: 100%;
+    height: auto;
+    padding: 20px 0;
+    text-align: center;
+    font-family: NexaLight;
+
+}
+.pricing-item2 a{
+    text-decoration: none;
+    color: #fff;
+    padding: 15px 40px;
+    border-radius: 50px;
+    display: inline-block;
+    margin: 40px auto 0 auto;
+    font-size: 20px;
+    font-family: NexaBold;
+}
+strong{
+    font-family: NexaBold;
+}
+.pricing-item2 h2{
+    font-size: 55px;
+    color: #415367;
+    font-family: NexaBold;
+}
+.pricing-box-item2 h4{
+    font-size: 12px;
+    
+}
+.pricing-box-item2 p{
+    color: #415367
+
+}
+.pricing-box-item2{
+    width: 100%;
+    height: auto;
+    padding: 20px 0;
+    text-align: center;
+    font-family: NexaLight;
+    color:white;
+}
+
+.bg1{
+    background: #ecb752;
+}
+.bg2{
+    background:#80b0f0
+}
+.bg3{
+    background:#82cab5
+}
+.info{
+    display: flex;
+    padding-left: 50px;
+    align-items: center;
+}
+.info div{
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    margin: 20px 15px 20px 0;
+}
+.pricing-box-item1 h3{
+    font-family: NexaBold;
+    font-size: 40px;
+}
