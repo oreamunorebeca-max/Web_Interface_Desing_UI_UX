@@ -1,0 +1,297 @@
+*{ 
+    margin: 0;
+    padding: 0; 
+    box-sizing: border-box; 
+    font-family: "Montserrat", sans-serif;
+}
+
+/* Inicio de la primera parte Yourshop */
+.header { 
+    width: 100%; 
+    height: 100px; 
+    min-width: 1440px;
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    background-color:transparent; 
+}
+
+.logo { 
+    font-size: 32px; 
+    font-weight: 800; 
+    margin-left: 80px;
+    color: #007f76; 
+    flex: 1; 
+   
+}
+
+.menu { 
+    list-style: none; 
+    gap: 80px; 
+    align-items: center; 
+    display: flex; 
+    flex: 2; 
+
+}
+
+.menu li a {
+    text-decoration: none; 
+    color: #007f76; 
+    font-weight: 700; 
+    font-size: 24px; 
+    
+    
+}
+
+.search-bar {
+    display: flex; 
+    align-items: center;
+    margin-right: 100px; 
+    border: 2px solid #007f76; 
+    border-radius: 25px; 
+    padding: 5px 15px; 
+    flex: 1;
+
+}
+
+.search-bar input { 
+    border: none; 
+    outline: none; 
+    width: 100%; 
+    font-size: 16px;
+}
+
+/* Inicio de la segunda parte New Collections */
+.hero { 
+    min-width: 1440px;
+    display: flex; 
+    height: 500px; 
+    background: #ffc98f;
+    background: linear-gradient(130deg, rgba(255, 201, 143, 1) 30%, rgba(255, 255, 174, 1) 74%);
+    margin-bottom: 100px;
+}
+
+.hero-info { 
+    flex: 1; 
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center; 
+}
+
+.hero-img { 
+    flex: 1; 
+    background-image: url('images/hero.jpg'); 
+    background-size: cover; 
+    background-position: center;
+    background-repeat: no-repeat; /*descubrí esto viendo todos los background*/
+    min-height: 90%;
+}
+
+
+.hero-placeholder { 
+    display: none; 
+}
+.hero-placeholder {
+    width: 100%;
+    height: 300px;
+    background: gray; /* Para probar que el contenedor existe */
+}
+
+.hero-info h1 { 
+    font-size: 70px;                                 
+    font-weight: 800;
+    margin-left: 100px; 
+    padding-bottom: 40px; 
+    
+}
+
+.hero-info p { 
+    font-size: 24px; 
+    font-weight: 600; 
+    margin-left: 40px;
+    padding: 0 40px 0 60px; 
+}
+
+.boton { 
+    width: 160px;
+    height: 40px; 
+    padding: 8px; 
+    background: linear-gradient(80deg, rgba(17, 181, 184, 1) 62%, rgba(0, 0, 0, 0.8) 100%); 
+    color: white; 
+    border: none; 
+    border-radius: 20px; 
+    font-weight: 700; 
+    font: size 22px;
+    margin-left: 100px; 
+    margin-top: 30px;
+    cursor: pointer;
+}
+/*Inicio de la tercera parte productos*/
+
+.contenedor-productos { 
+    display: flex; 
+    flex-wrap: nowrap; 
+    justify-content: space-around; 
+    gap: 50px; 
+    padding: 30px 8%; 
+    
+    
+}
+
+.foto-placeholder { 
+    width: 300px; 
+    height: 350px; 
+    object-fit: cover;
+    border-radius: 10px; 
+    margin-bottom: 8px; 
+    background-size: cover; 
+    background-position: center;
+    background-repeat: no-repeat;
+    
+  
+}
+
+/* Esto le da tamaño a todos los contenedores de fotos */
+.foto-placeholder {
+    width: 100%;
+    height: 200px; 
+    background-size: cover;
+    background-position: center;
+}
+
+/* Corrección de rutas: todas deben empezar igual */
+
+.hero-img { 
+    flex: 1; 
+    background-image: url('images/hero.jpg'); 
+    background-size: cover;
+    background-position: center;
+}
+/* Esto le da el tamaño y formato general a todas las cajas */
+.foto-placeholder {
+    width: 100%;
+    height: 200px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* AQUÍ ESTÁ EL CAMBIO: Quita el espacio y el .foto-placeholder de estas líneas */
+.image-1 { background-image: url('images/foto1.jpg'); }
+.image-2 { background-image: url('images/foto2.jpg'); }
+.image-3 { background-image: url('images/foto3.jpg'); }
+.image-4 { background-image: url('images/foto4.jpg'); }
+.image-5 { background-image: url('images/foto5.jpg'); }
+.image-6 { background-image: url('images/foto6.jpg'); }
+
+.info-producto { 
+    display: flex;
+    justify-content: space-between; 
+    font-size: 32px; 
+}
+.line{
+    border: 1px solid #9b9b9b;
+}
+
+.precio {
+    font-size: 32px;
+    color: #007f76;
+    font-weight: 700;
+}
+.brand { 
+    font-size: 22px; 
+    color: #9b9b9b; 
+}
+
+
+.estrellas { 
+    color: #f1c40f; 
+    font-size: 32px; 
+}
+.contenedor-productos p{
+    display: inline;
+    text-align: right;
+    margin-left: 50px;
+}
+
+/* Inicia la cuarta parte footer */
+.footer { 
+    width: 100%; 
+    min-width: 1440px;
+    background-color: #e0e0e0; 
+    padding: 60px 8%; 
+    margin-top: 0; 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: flex-start;
+    gap: 40px; 
+}
+
+.footer h4 {
+    font-size: 20px;
+    font-weight: 800;
+    color: #000;
+    margin-bottom: 15px;
+}
+
+.footer p {
+    font-size: 16px; 
+    line-height: 1.5;
+    color: #666;
+    text-align: left;
+}
+.footer-color p{
+    margin: 20px 0 20px 0;
+    font-size: 16px;
+}
+
+
+.input-grupo input {
+    flex: 1; 
+    padding: 12px 15px; 
+    border: none; 
+    outline: none; 
+    font-size: 14px;
+}
+
+
+.input-grupo { 
+    display: flex; 
+    background: white; 
+    border-radius: 4px;
+    border: 1px solid #ccc; 
+}
+
+.input-grupo input {
+    width: 200px;
+    padding: 10px; 
+    border: none; 
+    outline: none; 
+}
+
+.input-grupo button { 
+    width: 50px;
+    height: 40px; 
+    background: linear-gradient(80deg, rgba(17, 181, 184, 1) 62%, rgba(0, 0, 0, 0.8) 100%);
+    border: none; 
+    cursor: pointer;
+    display: flex;           
+    justify-content: center;  
+    align-items: center;       
+}
+
+.input-grupo button img {
+    width: 30px;  
+    height: auto;
+}
+
+
+
+
+
+
+
+
+
+
+
