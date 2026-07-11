@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mine Sweeper</title>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(rgba(15, 52, 96, 0.85), rgba(22, 33, 62, 0.9)), url('images/fondojuego2.png') no-repeat center center fixed;
+            background-size: cover;
+            color: #ffffff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .main-layout {
+            display: flex;
+            align-items: flex-start;
+            gap: 50px;
+        }
+
+        .instructions {
+            background: #16213e;
+            padding: 50px;
+            border-radius: 10px;
+            border: 2px solid #0f3460;
+            width: 250px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            color: #E0FFFF;
+        }
+
+        .instructions h2 {
+            color: #8B008B;
+            margin-top: 0;
+            text-align: center;
+            text-decoration: underline;
+        }
+
+        .instructions ul {
+            padding-left: 20px;
+            line-height: 1.6;
+        }
+
+        .game-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            margin: 15px 0;
+            color: #8B008B;
+            font-size: 38px;
+            font-weight: bold;
+            text-align: center;
+            text-decoration: underline;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        #info {
+            display: flex;
+            gap: 25px;
+            margin-bottom: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            background: #16213e;
+            padding: 15px 25px;
+            border-radius: 10px;
+            border: 2px solid #0f3460;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        #info div {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .label {
+            color: #a3a3a3;
+            font-size: 14px;
+            text-transform: uppercase;
+        }
+
+        canvas {
+            border: 4px solid #0f3460;
+            background: grey;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="main-layout">
+        
+        <div class="instructions">
+            <h2>How to Play</h2>
+            <ul>
+                <li><strong>Controls:</strong> Use your <em>Arrow Keys</em> to navigate the board.</li>
+                <li><strong>Collect:</strong> Reach the items to increase your score and advance to the next level.</li>
+                <li><strong>Avoid:</strong> Stay away from the bombs!</li>
+                <li><strong>Lives:</strong> You have 3 lives. If you hit a bomb 3 times, it's <strong>Game Over</strong>.</li>
+            </ul>
+        </div>
+
+        <div class="game-wrapper">
+            <h1>Mine Sweeper</h1>
+
+            <div id="info">
+                <div><span class="label">Puntos:</span> <span id="score">0</span></div>
+                <div><span class="label">Nivel:</span> <span id="level">1</span></div>
+                <div><span class="label">Tiempo:</span> <span id="timer">30s</span></div>
+                <div><span class="label">Vidas:</span> <span id="lives">❤️❤️❤️</span></div>
+            </div>
+
+            <canvas id="game" width="800" height="800"></canvas>
+        </div>
+
+    </div>
+
+    <script src="final_exam_mine_sweeper.js"></script>
+
+</body>
+</html>
