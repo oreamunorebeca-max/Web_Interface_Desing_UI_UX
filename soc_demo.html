@@ -57,7 +57,7 @@
     
     <div class="soc-body">
         <div class="controls-bar">
-            <button class="btn-run" onclick="ejecutarPasoASasoRealista()">▶ INICIAR ANÁLISIS DE TELEMETRÍA OTA</button>
+            <button class="btn-run" onclick="ejecutarPasoAPasoRealista()">▶ INICIAR ANÁLISIS DE TELEMETRÍA OTA</button>
             <button class="btn-clear" onclick="resetSOC()">REINICIAR CONSOLA</button>
         </div>
 
@@ -198,17 +198,15 @@
         chartInterval = setInterval(() => updateTraffic(false), 1000);
     }
 
-    function ejecutarPasoASasoRealista() {
+    function ejecutarPasoAPasoRealista() {
         resetSOC();
         
-        // Fase 1
         setTimeout(() => {
             setProgreso(20);
             logSOC("20:41:02", "Monitoreando tráfico normal de dispositivos inteligentes...", "log-info", 
             "<strong>1. Estado Normal:</strong> El sistema detecta que los dispositivos inteligentes de la casa se comunican con normalidad para recibir mantenimiento.");
         }, 1500);
 
-        // Fase 2
         setTimeout(() => {
             setProgreso(40);
             riskChart.data.datasets[0].data = [60, 40, 0];
@@ -217,7 +215,6 @@
             "<strong>2. El Vector de Riesgo:</strong> El dispositivo pide una actualización usando protocolo HTTP plano. Al no estar cifrada, cualquier persona en la red puede ver lo que se transmite.");
         }, 13000);
 
-        // Fase 3
         setTimeout(() => {
             setProgreso(65);
             document.getElementById("statusBadge").className = "status-badge status-alert";
@@ -232,7 +229,6 @@
             "<strong>3. Ejecución del Ataque:</strong> Un intruso en la red local intercepta la petición y redirige al dispositivo hacia un servidor falso controlado por él.");
         }, 25000);
 
-        // Fase 4
         setTimeout(() => {
             setProgreso(85);
             document.getElementById('integrityVal').innerText = "FALLIDA";
@@ -241,7 +237,6 @@
             "<strong>4. El Impacto:</strong> Como el aparato no verifica firmas digitales ni arranque seguro, acepta el archivo falso que trae oculto un acceso ilegal (puerta trasera).");
         }, 37000);
 
-        // Fase 5
         setTimeout(() => {
             setProgreso(100);
             logSOC("20:42:00", "BRECHA CRÍTICA: Control total obtenido por el atacante.", "log-succ",
