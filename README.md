@@ -47,9 +47,9 @@
 
 ---
 
-<h2 style="color: turquoise;">⚡ Cybersecurity Demo</h2>
+<h2 style="color: turquoise;">🖥️ Cybersecurity Demo</h2>
 
-* 👩‍💻👩🏻‍💻 [SOC Demo](./soc_demo.html)
+* 👩🏻‍💻 [SOC Demo](./soc_demo.html)
 
 ---
 <h2><font color="#800080">🌐 Complementary Skills</font></h2>
