@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOC Telemetry & IoT OTA Monitoring Console</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --bg-deep: #050b0e;
+            --panel-bg: #0b131a;
+            --border-teal: #00ffff;
+            --text-teal: #00ffff;
+            --text-dim: #7090a0;
+            --accent-alert: #ff3366;
+            --accent-warn: #ffcc00;
+            --accent-success: #00ffcc;
+        }
+        body { background-color: var(--bg-deep); color: var(--text-teal); font-family: 'Consolas', 'Courier New', monospace; margin: 0; padding: 20px; }
+        .soc-container { max-width: 1200px; margin: auto; background: var(--panel-bg); border: 1px solid var(--border-teal); border-radius: 6px; box-shadow: 0 0 25px rgba(0, 255, 255, 0.3); overflow: hidden; }
+        .soc-header { background: #0d1922; padding: 15px 20px; border-bottom: 1px solid var(--border-teal); display: flex; justify-content: space-between; align-items: center; box-shadow: inset 0 0 10px rgba(0, 255, 255, 0.1); }
+        .soc-header h1 { margin: 0; font-size: 18px; color: #ffffff; letter-spacing: 1px; text-shadow: 0 0 8px rgba(0, 255, 255, 0.6); }
+        .status-badge { background: #003333; color: var(--text-teal); padding: 4px 10px; border-radius: 4px; font-size: 12px; border: 1px solid var(--border-teal); box-shadow: 0 0 8px rgba(0, 255, 255, 0.4); }
+        .status-alert { background: #330011; color: var(--accent-alert); border-color: var(--accent-alert); box-shadow: 0 0 8px rgba(255, 51, 102, 0.4); }
+        .soc-body { padding: 20px; }
+        .controls-bar { display: flex; gap: 15px; margin-bottom: 20px; align-items: center; }
+        button { padding: 10px 20px; font-family: 'Consolas', monospace; font-weight: bold; border-radius: 4px; cursor: pointer; font-size: 14px; transition: 0.2s; }
+        .btn-run { background: #004d4d; color: #ffffff; border: 1px solid var(--text-teal); box-shadow: 0 0 10px rgba(0, 255, 255, 0.3); }
+        .btn-run:hover { background: #008080; box-shadow: 0 0 15px rgba(0, 255, 255, 0.6); }
+        .btn-clear { background: #111a22; color: var(--text-dim); border: 1px solid #2d4a5c; }
+        .btn-clear:hover { background: #1a2733; color: #fff; }
+        .progress-container { background: #030608; border: 1px solid #1a3340; height: 18px; border-radius: 3px; margin-bottom: 20px; overflow: hidden; }
+        .progress-bar-teal { height: 100%; width: 0%; background: var(--text-teal); transition: width 0.8s ease-in-out; box-shadow: 0 0 15px rgba(0,255,255,0.8); }
+        .dashboard-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 15px; margin-bottom: 20px; }
+        .chart-box { background: #050b0e; border: 1px solid #1a3340; padding: 25px; border-radius: 4px; position: relative; height: 200px; box-shadow: inset 0 0 10px rgba(0, 255, 255, 0.05); }
+        .chart-title { position: absolute; top: 10px; left: 15px; font-size: 11px; color: var(--text-dim); z-index: 10; letter-spacing: 0.5px; }
+        .metrics-box { display: flex; flex-direction: column; justify-content: space-around; background: #050b0e; border: 1px solid #1a3340; padding: 15px; border-radius: 4px; }
+        .metric-item { text-align: center; }
+        .metric-value { font-size: 24px; font-weight: bold; color: #fff; margin-top: 5px; text-shadow: 0 0 10px rgba(0, 255, 255, 0.4); }
+        .grid-layout { display: grid; grid-template-columns: 2fr 1fr; gap: 20px; }
+        .console-box { background: #030608; border: 1px solid #1a3340; padding: 15px; height: 320px; overflow-y: auto; font-size: 13px; line-height: 1.6; border-radius: 4px; box-shadow: inset 0 0 10px rgba(0,0,0,0.8); }
+        .pitch-box { background: #0d1922; border: 1px solid var(--border-teal); padding: 15px; border-radius: 4px; font-size: 14px; line-height: 1.6; color: #c0f0f0; box-shadow: 0 0 10px rgba(0, 255, 255, 0.15); }
+        .log-time { color: var(--text-dim); }
+        .log-info { color: #80ffff; }
+        .log-warn { color: var(--accent-warn); text-shadow: 0 0 5px rgba(255, 204, 0, 0.3); }
+        .log-crit { color: var(--accent-alert); font-weight: bold; text-shadow: 0 0 8px rgba(255, 51, 102, 0.5); }
+        .log-succ { color: var(--accent-success); text-shadow: 0 0 8px rgba(0, 255, 204, 0.5); }
+    </style>
+</head>
+<body>
+
+<div class="soc-container">
+    <div class="soc-header">
+        <h1>SIEM / SOC — TELEMETRY MONITORING: IOT_GATEWAY_PROD</h1>
+        <div id="statusBadge" class="status-badge">ESTADO: MONITOREO ACTIVO [TLS/HTTP]</div>
+    </div>
+    
+    <div class="soc-body">
+        <div class="controls-bar">
+            <button class="btn-run" onclick="ejecutarPasoASasoRealista()">▶ INICIAR ANÁLISIS DE TELEMETRÍA OTA</button>
+            <button class="btn-clear" onclick="resetSOC()">REINICIAR CONSOLA</button>
+        </div>
+
+        <div class="progress-container">
+            <div id="socProgress" class="progress-bar-teal"></div>
+        </div>
+
+        <div class="dashboard-grid">
+            <div class="chart-box">
+                <div class="chart-title">TRÁFICO DE RED (Paquetes / s)</div>
+                <canvas id="trafficChart"></canvas>
+            </div>
+            <div class="chart-box">
+                <div class="chart-title">ÍNDICE DE RIESGO DE CARGA ÚTIL</div>
+                <canvas id="riskChart"></canvas>
+            </div>
+            <div class="metrics-box">
+                <div class="metric-item">
+                    <div class="chart-title" style="position:relative; top:0; left:0;">LATENCIA (ms)</div>
+                    <div id="latencyVal" class="metric-value" style="color: var(--text-teal);">12ms</div>
+                </div>
+                <div class="metric-item">
+                    <div class="chart-title" style="position:relative; top:0; left:0;">INTEGRIDAD FIRMA</div>
+                    <div id="integrityVal" class="metric-value" style="color: var(--text-dim);">N/A</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid-layout">
+            <div class="console-box" id="socConsole">
+                <span class="log-time">[00:00:00]</span> <span class="log-info">Sistema SOC inicializado. Monitoreando dispositivos en red local...</span><br>
+            </div>
+            
+            <div class="pitch-box" id="pitchDisplay">
+                <p id="pitchText">Haz clic en <strong>"Iniciar Análisis de Telemetría OTA"</strong> para ver la simulación en tiempo real de cómo ocurre la vulnerabilidad paso a paso.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    Chart.defaults.color = '#7090a0';
+    Chart.defaults.font.family = 'Consolas, monospace';
+
+    let trafficChart, riskChart;
+    let dataPoints = Array(20).fill(150);
+    let chartInterval;
+
+    function initCharts() {
+        const ctxTraffic = document.getElementById('trafficChart').getContext('2d');
+        trafficChart = new Chart(ctxTraffic, {
+            type: 'line',
+            data: {
+                labels: Array(20).fill(''),
+                datasets: [{
+                    label: 'Tráfico',
+                    data: dataPoints,
+                    borderColor: '#00ffff',
+                    backgroundColor: 'rgba(0, 255, 255, 0.1)',
+                    borderWidth: 2,
+                    fill: true,
+                    tension: 0.4,
+                    pointRadius: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: {
+                    x: { display: false },
+                    y: { display: true, min: 0, max: 1000, grid: { color: '#1a3340' } }
+                }
+            }
+        });
+
+        const ctxRisk = document.getElementById('riskChart').getContext('2d');
+        riskChart = new Chart(ctxRisk, {
+            type: 'doughnut',
+            data: {
+                labels: ['Seguro', 'Sospechoso', 'Crítico'],
+                datasets: [{
+                    data: [100, 0, 0],
+                    backgroundColor: ['#00b3b3', '#ffcc00', '#ff3366'],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                cutout: '75%',
+                plugins: { legend: { position: 'right', labels: { boxWidth: 10, color: '#c0f0f0' } } }
+            }
+        });
+    }
+
+    function updateTraffic(isAttacking) {
+        let base = isAttacking ? 800 : 150;
+        let volatility = isAttacking ? 200 : 50;
+        dataPoints.shift();
+        dataPoints.push(base + (Math.random() * volatility - volatility/2));
+        trafficChart.update();
+        
+        document.getElementById('latencyVal').innerText = isAttacking ? Math.floor(150 + Math.random()*50) + "ms" : Math.floor(10 + Math.random()*5) + "ms";
+        document.getElementById('latencyVal').style.color = isAttacking ? "var(--accent-alert)" : "var(--text-teal)";
+    }
+
+    function logSOC(tiempo, mensaje, clase, pitch) {
+        const consola = document.getElementById("socConsole");
+        consola.innerHTML += `<span class="log-time">[${tiempo}]</span> <span class="${clase}">${mensaje}</span><br>`;
+        consola.scrollTop = consola.scrollHeight;
+        document.getElementById("pitchText").innerHTML = pitch;
+    }
+
+    function setProgreso(valor) {
+        document.getElementById("socProgress").style.width = valor + "%";
+    }
+
+    function resetSOC() {
+        clearInterval(chartInterval);
+        document.getElementById("socConsole").innerHTML = '<span class="log-time">[00:00:00]</span> <span class="log-info">Consola restablecida. Esperando inicio...</span><br>';
+        document.getElementById("pitchText").innerHTML = 'Haz clic en <strong>"Iniciar Análisis de Telemetría OTA"</strong> para ver la simulación en tiempo real de cómo ocurre la vulnerabilidad paso a paso.';
+        document.getElementById("statusBadge").className = "status-badge";
+        document.getElementById("statusBadge").innerText = "ESTADO: MONITOREO ACTIVO [TLS/HTTP]";
+        document.getElementById('integrityVal').innerText = "N/A";
+        document.getElementById('integrityVal').style.color = "var(--text-dim)";
+        
+        dataPoints = Array(20).fill(150);
+        trafficChart.data.datasets[0].data = dataPoints;
+        trafficChart.data.datasets[0].borderColor = '#00ffff';
+        trafficChart.data.datasets[0].backgroundColor = 'rgba(0, 255, 255, 0.1)';
+        trafficChart.update();
+
+        riskChart.data.datasets[0].data = [100, 0, 0];
+        riskChart.update();
+
+        setProgreso(0);
+        chartInterval = setInterval(() => updateTraffic(false), 1000);
+    }
+
+    function ejecutarPasoASasoRealista() {
+        resetSOC();
+        
+        // Fase 1
+        setTimeout(() => {
+            setProgreso(20);
+            logSOC("20:41:02", "Monitoreando tráfico normal de dispositivos inteligentes...", "log-info", 
+            "<strong>1. Estado Normal:</strong> El sistema detecta que los dispositivos inteligentes de la casa se comunican con normalidad para recibir mantenimiento.");
+        }, 1500);
+
+        // Fase 2
+        setTimeout(() => {
+            setProgreso(40);
+            riskChart.data.datasets[0].data = [60, 40, 0];
+            riskChart.update();
+            logSOC("20:41:15", "Detectada solicitud de actualización por HTTP (sin cifrar).", "log-warn",
+            "<strong>2. El Vector de Riesgo:</strong> El dispositivo pide una actualización usando protocolo HTTP plano. Al no estar cifrada, cualquier persona en la red puede ver lo que se transmite.");
+        }, 13000);
+
+        // Fase 3
+        setTimeout(() => {
+            setProgreso(65);
+            document.getElementById("statusBadge").className = "status-badge status-alert";
+            document.getElementById("statusBadge").innerText = "ESTADO: ATAQUE MITM DETECTADO";
+            clearInterval(chartInterval);
+            chartInterval = setInterval(() => updateTraffic(true), 500); 
+            trafficChart.data.datasets[0].borderColor = '#ff3366';
+            trafficChart.data.datasets[0].backgroundColor = 'rgba(255, 51, 102, 0.2)';
+            riskChart.data.datasets[0].data = [10, 20, 70];
+            riskChart.update();
+            logSOC("20:41:30", "Alerta: Se detectó una suplantación de ruta en la red (Ataque MitM).", "log-crit",
+            "<strong>3. Ejecución del Ataque:</strong> Un intruso en la red local intercepta la petición y redirige al dispositivo hacia un servidor falso controlado por él.");
+        }, 25000);
+
+        // Fase 4
+        setTimeout(() => {
+            setProgreso(85);
+            document.getElementById('integrityVal').innerText = "FALLIDA";
+            document.getElementById('integrityVal').style.color = "var(--accent-alert)";
+            logSOC("20:41:45", "Archivo malicioso aceptado. El dispositivo no tiene Secure Boot.", "log-crit",
+            "<strong>4. El Impacto:</strong> Como el aparato no verifica firmas digitales ni arranque seguro, acepta el archivo falso que trae oculto un acceso ilegal (puerta trasera).");
+        }, 37000);
+
+        // Fase 5
+        setTimeout(() => {
+            setProgreso(100);
+            logSOC("20:42:00", "BRECHA CRÍTICA: Control total obtenido por el atacante.", "log-succ",
+            "<strong>5. Conclusión:</strong> Esto demuestra por qué actualizar sin cifrado (HTTPS) ni validación de seguridad pone en riesgo toda la infraestructura.");
+        }, 49000);
+    }
+
+    window.onload = () => {
+        initCharts();
+        chartInterval = setInterval(() => updateTraffic(false), 1000);
+    };
+</script>
+
+</body>
+</html>
