@@ -47,6 +47,11 @@
 
 ---
 
+<h2 style="color: turquoise;">⚡ Cybersecurity Demo</h2>
+
+* 👩‍💻👩🏻‍💻 [SOC Demo](./soc_demo.html)
+
+---
 <h2><font color="#800080">🌐 Complementary Skills</font></h2>
 
 * 🎨 **[Web Interface Design (UI/UX)](./certificates/diseno_interfases_web_ui_ux.pdf)**
