@@ -23,14 +23,14 @@
         .status-badge { background: #003333; color: var(--text-teal); padding: 4px 10px; border-radius: 4px; font-size: 12px; border: 1px solid var(--border-teal); box-shadow: 0 0 8px rgba(0, 255, 255, 0.4); }
         .status-alert { background: #330011; color: var(--accent-alert); border-color: var(--accent-alert); box-shadow: 0 0 8px rgba(255, 51, 102, 0.4); }
         .soc-body { padding: 20px; }
-        .controls-bar { display: flex; gap: 15px; margin-bottom: 20px; align-items: center; }
-        button, .btn-back { padding: 10px 20px; font-family: 'Consolas', monospace; font-weight: bold; border-radius: 4px; cursor: pointer; font-size: 14px; transition: 0.2s; text-decoration: none; display: inline-block; align-items: center; }
-        .btn-back { background: #0d1922; color: var(--text-teal); border: 1px solid var(--border-teal); }
-        .btn-back:hover { background: #003333; box-shadow: 0 0 10px rgba(0, 255, 255, 0.4); }
+        .controls-bar { display: flex; gap: 15px; margin-bottom: 20px; align-items: center; flex-wrap: wrap; }
+        button { padding: 10px 20px; font-family: 'Consolas', monospace; font-weight: bold; border-radius: 4px; cursor: pointer; font-size: 14px; transition: 0.2s; }
         .btn-run { background: #004d4d; color: #ffffff; border: 1px solid var(--text-teal); box-shadow: 0 0 10px rgba(0, 255, 255, 0.3); }
         .btn-run:hover { background: #008080; box-shadow: 0 0 15px rgba(0, 255, 255, 0.6); }
         .btn-clear { background: #111a22; color: var(--text-dim); border: 1px solid #2d4a5c; }
         .btn-clear:hover { background: #1a2733; color: #fff; }
+        .btn-back { background: transparent; color: var(--text-teal); border: 1px solid var(--text-teal); text-decoration: none; display: inline-flex; align-items: center; justify-content: center; padding: 10px 20px; font-family: 'Consolas', monospace; font-weight: bold; border-radius: 4px; font-size: 14px; transition: 0.2s; box-sizing: border-box; }
+        .btn-back:hover { background: rgba(0, 255, 255, 0.1); box-shadow: 0 0 10px rgba(0, 255, 255, 0.4); }
         .progress-container { background: #030608; border: 1px solid #1a3340; height: 18px; border-radius: 3px; margin-bottom: 20px; overflow: hidden; }
         .progress-bar-teal { height: 100%; width: 0%; background: var(--text-teal); transition: width 0.8s ease-in-out; box-shadow: 0 0 15px rgba(0,255,255,0.8); }
         .dashboard-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 15px; margin-bottom: 20px; }
@@ -235,6 +235,7 @@
         setTimeout(() => {
             setProgreso(85);
             document.getElementById('integrityVal').innerText = "FALLIDA";
+            document.getElementById('integrityVal.style.color') = "var(--accent-alert)";
             document.getElementById('integrityVal').style.color = "var(--accent-alert)";
             logSOC("20:41:45", "Archivo malicioso aceptado. El dispositivo no tiene Secure Boot.", "log-crit",
             "<strong>4. El Impacto:</strong> Como el aparato no verifica firmas digitales ni arranque seguro, acepta el archivo falso que trae oculto un acceso ilegal (puerta trasera).");
