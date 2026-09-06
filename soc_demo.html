@@ -26,6 +26,11 @@
         .soc-body { padding: 20px; }
         .controls-bar { display: flex; gap: 15px; margin-bottom: 20px; align-items: center; }
         button { padding: 10px 20px; font-family: 'Consolas', monospace; font-weight: bold; border-radius: 4px; cursor: pointer; font-size: 14px; transition: 0.2s; }
+        
+        /* Estilos del nuevo botón de volver */
+        .btn-back { background: transparent; color: var(--text-teal); border: 1px solid var(--text-teal); }
+        .btn-back:hover { background: #003333; box-shadow: 0 0 10px rgba(0, 255, 255, 0.3); }
+        
         .btn-run { background: #004d4d; color: #ffffff; border: 1px solid var(--text-teal); box-shadow: 0 0 10px rgba(0, 255, 255, 0.3); }
         .btn-run:hover { background: #008080; box-shadow: 0 0 15px rgba(0, 255, 255, 0.6); }
         .btn-clear { background: #111a22; color: var(--text-dim); border: 1px solid #2d4a5c; }
@@ -58,6 +63,8 @@
     
     <div class="soc-body">
         <div class="controls-bar">
+            <!-- Nuevo botón implementado aquí -->
+            <button class="btn-back" onclick="window.location.href='../index.html'">⬅ VOLVER</button>
             <button class="btn-run" onclick="ejecutarPasoAPasoRealista()">▶ INICIAR ANÁLISIS DE TELEMETRÍA OTA</button>
             <button class="btn-clear" onclick="resetSOC()">REINICIAR CONSOLA</button>
         </div>
