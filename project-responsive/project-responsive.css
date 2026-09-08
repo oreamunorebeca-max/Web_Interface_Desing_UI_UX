@@ -7,6 +7,7 @@
 body {
     font-family: "Montserrat", sans-serif;
 }
+
 /****************************************************variables***********************************************************************/
 :root {
     --font-family: "Montserrat", sans-serif;
@@ -31,6 +32,7 @@ body {
     --cuerpo-r: 18px;
     --gap-r: 20px;
 }
+
 /****************************************************header***********************************************************************/
 header {
     width: 100%;
@@ -42,7 +44,7 @@ header {
     position: sticky;
     top: 0;
     z-index: 100;
-    box-shadow: 0px 10px 20px rgba(0,0,0,0.5)
+    box-shadow: 0px 10px 20px rgba(0,0,0,0.5);
 }
 
 .logo img {
@@ -90,19 +92,17 @@ header nav a {
     align-items: center;
     animation: fondo-animado 5s ease infinite;
     overflow: hidden;
-     
-    
 }
 
 @keyframes fondo-animado {
-    0%{
-    background-position: 0% 50%; 
+    0% {
+        background-position: 0% 50%; 
     }
-    50%{ 
-    background-position: 100% 50%; 
+    50% { 
+        background-position: 100% 50%; 
     }
-    100%{ 
-    background-position: 0% 50%; 
+    100% { 
+        background-position: 0% 50%; 
     }
 }
 
@@ -115,7 +115,6 @@ header nav a {
     background-size: cover;
     opacity: 0.2;
     z-index: 5;
-    
 }
 
 .trapezoide-1 {
@@ -194,20 +193,18 @@ header nav a {
     justify-content: flex-end;
     z-index: 20;
 }
-.hero-image img{
+
+.hero-image img {
     width: 100%;
     display: flex;
     justify-content: flex-end;
     z-index: 20;
 }
 
-
 /****************************************************seccion 2 colmena***********************************************************************/
-
 .colmena {
     text-align: center;
     padding: 100px 20px 100px;
-    
 }
 
 .colmena h2 {
@@ -226,7 +223,6 @@ header nav a {
     justify-content: center;
     align-items: flex-start;
     height: 1560px; 
-    
 }
 
 .col1, .col2, .col3 {
@@ -238,7 +234,6 @@ header nav a {
     justify-content: center;
     gap: 10px; 
 }
-
 
 .col1 { 
     transform: translateX(100px); 
@@ -269,7 +264,6 @@ header nav a {
     justify-content: center;
     color: var(--color-blanco);
 }
-
 
 .centro-hex h3 {
     font-size: 40px;
@@ -318,9 +312,10 @@ header nav a {
 .hex-6 { 
     background-image: url('images/steak.png');
 }
+
 /****************************************************seccion 3 banner promocional***********************************************************************/
 .banner-promocional {
-    background:var(--color-secundario);
+    background: var(--color-secundario);
     padding: 100px 8%;
     display: flex;
     justify-content: center;
@@ -333,7 +328,6 @@ header nav a {
     display: flex;
     justify-content: space-between;
     align-items: center;
-
 }
 
 .banner-visual {
@@ -348,14 +342,12 @@ header nav a {
     width: 100%;
     max-width: 600px;
     z-index: 5;
-    
 }
 
 .decoracion {
     position: absolute;
     z-index: 2;
 }
-
 
 .ajo-1 {
     width: 80px;
@@ -364,16 +356,11 @@ header nav a {
     transform: rotate(-20deg);
     animation: latido 1.5s infinite ease-in-out;
 }
+
 @keyframes latido {
-  0% {
-    transform: scale(1); 
-  }
-  50% {
-    transform: scale(1.5); 
-  }
-  100% {
-    transform: scale(1); 
-  }
+  0% { transform: scale(1); }
+  50% { transform: scale(1.5); }
+  100% { transform: scale(1); }
 }
 
 .ajo-2 {
@@ -381,40 +368,28 @@ header nav a {
     top: 35%;
     left: -15%;
     transform: rotate(20deg);
-    animation: latido 1.5s infinite ease-in-out;
-}
-@keyframes latido {
-  0% {
-    transform: scale(1); 
-  }
-  50% {
-    transform: scale(1.3); 
-  }
-  100% {
-    transform: scale(1); 
-  }
+    animation: latido-2 1.5s infinite ease-in-out;
 }
 
+@keyframes latido-2 {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.3); }
+  100% { transform: scale(1); }
+}
 
 .chile {
     width: 100px;
     bottom: 20%;
     right: -10%;
     transform: rotate(-10deg);
-    animation: latido 0.8s infinite ease-in-out;
-}
-@keyframes latido {
-  0% {
-    transform: rotate(-5deg); 
-  }
-  50% {
-    transform: rotate(5deg); 
-  }
-  100% {
-    transform: rotate(-5deg); 
-  }
+    animation: rotar-chile 0.8s infinite ease-in-out;
 }
 
+@keyframes rotar-chile {
+  0% { transform: rotate(-5deg); }
+  50% { transform: rotate(5deg); }
+  100% { transform: rotate(-5deg); }
+}
 
 .banner-info {
     flex: 1;
@@ -453,8 +428,8 @@ header nav a {
     font-weight: 700;
     border-radius: 8px;
     cursor: pointer;
-    
 }
+
 /****************************************************seccion 4 (grid en areas)popular recipes***********************************************************************/
 .popular-recipes {
     padding: var(--padding-section);
@@ -476,17 +451,15 @@ header nav a {
 }
 
 .grid {
-    
     display: grid;
-    grid-template-columns: repeat(3,2fr);
-    grid-template-rows: 2fr 2fr 2fr 1fr ;
+    grid-template-columns: repeat(3, 2fr);
+    grid-template-rows: 2fr 2fr 2fr 1fr;
     gap: 20px;
     grid-template-areas: 
         "chicken goulash pasta"
         "steak steak pasta"
         "seafood turkey view-more";
 }
-
 
 .receta {
     min-height: 250px;
@@ -502,33 +475,36 @@ header nav a {
     transform: translateY(0);
     transition: all 0.3s ease;
 }
-.receta:hover{
+
+.receta:hover {
     transform: translateY(-15px);
 }
 
 .item-chicken { 
     grid-area: chicken; 
     background-image: url('images/1ercuadrogrid.jpg'); 
-
 }
+
 .item-goulash { 
     grid-area: goulash; 
     background-image: url('images/2docuadrogrid.jpg'); 
 }
+
 .item-steak { 
     grid-area: steak; 
     background-image: url('images/4artocuadrogrid.png'); 
     min-height: 500px;
- }
+}
+
 .item-seafood {
     grid-area: seafood; 
     background-image: url('images/5tocuadrogrid.png'); 
-    }
+}
+
 .item-turkey { 
     grid-area: turkey; 
     background-image: url('images/6tocuadrogrid.png'); 
 }
-
 
 .item-pasta-unificada {
     grid-area: pasta;
@@ -541,7 +517,6 @@ header nav a {
     background-size: cover;
     background-position: center;
 }
-
 
 .info-receta, .info-central {
     width: 100%;
@@ -592,7 +567,6 @@ header nav a {
 }
 
 /****************************************************Opcionales video y mapa***********************************************************************/
-
 .video-container {
     width: 100%;
     height: auto;
@@ -608,7 +582,7 @@ header nav a {
 }
 
 .chef-section {
-    padding: 60px 100px 0  60px;
+    padding: 60px 100px 0 60px;
     background-color: var(--color-blanco);
 }
 
@@ -664,7 +638,8 @@ header nav a {
     font-size: 14px;
     opacity: 0.9;
 }
-/* --- Seccion  del mapa--- */
+
+/* --- Seccion del mapa--- */
 .ubicacion-container {
     position: relative;
     width: 100%;
@@ -683,7 +658,6 @@ header nav a {
     z-index: 1; 
 }
 
-/*Esto tambien incluye la parte de animacion con javascript*/
 .cuadro-contacto {
     position: relative;
     z-index: 2; 
@@ -699,16 +673,17 @@ header nav a {
     transform: translateY(100px); 
     transition: all 0.5s ease-in-out; 
 }
+
 .cuadro-contacto.subir {
     opacity: 1;
     transform: translateY(0); 
 }
+
 .cuadro-contacto h2 {
     margin-bottom: 20px;
     font-family: sans-serif;
     color: var(--color-fuente-principal);
 }
-
 
 .cuadro-contacto input {
     width: 100%;
@@ -730,12 +705,9 @@ header nav a {
     cursor: pointer;
     font-size: 16px;
     font-weight: bold;
-    
 }
 
-
 /****************************************************Sección 5 footer***********************************************************************/
-
 .pie-pagina {
     background-color: var(--color-principal);
     color: var(--color-blanco);
@@ -767,7 +739,6 @@ header nav a {
     font-size: 14px;
 }
 
-
 .redes-sociales {
     margin-top: 20px;
     display: flex;
@@ -781,13 +752,8 @@ header nav a {
     transition: transform 0.3s, color 0.3s;
 }
 
-
-/* --- RESPONSIVE (MÓVIL) --- */
 /**************************************************** MEDIA QUERIES (MOBILE) ***********************************************************/
-
 @media (max-width: 768px) {
-    
-    /* 1. Ajustes Generales y Header */
     header {
         padding: 15px 20px;
         flex-direction: column;
@@ -806,7 +772,6 @@ header nav a {
         min-width: 100%;
     }
 
-    /* 2. Hero Section */
     .hero-section {
         height: auto;
         padding: 60px 20px;
@@ -837,12 +802,10 @@ header nav a {
         max-width: 280px;
     }
 
-    
     .trapezoide-1, .trapezoide-2, .sun-icon {
         display: none;
     }
 
-     /* 3. Colmena */
     .panal-container {
         flex-direction: column;
         height: auto;
@@ -862,7 +825,6 @@ header nav a {
         height: 350px;
     }
 
-    /* 4. Banner Promocional */
     .banner-container {
         flex-direction: column;
         gap: 40px;
@@ -872,9 +834,7 @@ header nav a {
         max-width: 300px;
     }
 
-    /* 5. Grid Most Popular Recipe */
     .grid {
-        
         grid-template-columns: 2fr; 
         grid-template-areas: 
             "chicken"
@@ -885,7 +845,8 @@ header nav a {
             "turkey"
             "view-more";
     }
-    .popular-recipes{
+
+    .popular-recipes {
         padding: 100px 50px;
     }
 
@@ -893,8 +854,6 @@ header nav a {
         min-height: 225px;
     }
 
-
-    /* 6. Sección del Chef */
     .chef-content {
         flex-direction: column;
         text-align: center;
@@ -904,15 +863,18 @@ header nav a {
     .chef-image img {
         max-width: 250px;
     }
-    .chef-image{
+
+    .chef-image {
         order: 2;
     }
+
     .ubicacion-container {
         padding: 0;
         flex-direction: column;
         height: auto;
     }
-    .chef-content{
+
+    .chef-content {
         padding-bottom: 0;
     }
 
@@ -927,11 +889,8 @@ header nav a {
         background-color: var(--color-fuente-secundaria);
         padding: 30px 20px;
     }
-    
 
-    /* 8. Footer */
     .pie-pagina {
-      
         padding: 40px 20px;
     }
 
